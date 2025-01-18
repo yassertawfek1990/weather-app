@@ -1,7 +1,7 @@
 
 async function getWeather(city) {
         console.log(city)
-        let y = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=us&key=SYVPH3DS5QMHS2HYF4TMMAZ6F&contentType=json`
+        let y = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=SYVPH3DS5QMHS2HYF4TMMAZ6F&contentType=json`
         const response = await fetch(y, {mode: 'cors'})
         console.log(response)
         const data = await response.json()
@@ -13,25 +13,6 @@ async function getWeather(city) {
 
 let returnedData;
 
-const checkbox = document.getElementById('myCheckbox');
-let degree = false
-// Check if the checkbox is checked
-checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
-        degree = true
-        console.log(`Checkbox is ${degree}`);
-        getTop(returnedData[0],degree)
-        getBottom(returnedData,degree)
-
-    } else {
-        degree = false
-        console.log(`Checkbox is ${degree}`);
-        getTop(returnedData[0],degree)
-        getBottom(returnedData,degree)
-
-    }
-        
-})
 let form = document.querySelector("form")
 form.addEventListener("keydown", async (event) => {
     // Cancel the default action, if needed
@@ -159,7 +140,7 @@ function getBottom(data,degree){
 
 (async () => {
     try {
-        let returnedData = await getWeather("berlin");
+        returnedData = await getWeather("berlin");
         getTop(returnedData[0],degree)
         getBottom(returnedData,degree)
 
@@ -169,6 +150,26 @@ function getBottom(data,degree){
     }
 })();
 
+const checkbox = document.getElementById('myCheckbox');
+let degree = false
+// Check if the checkbox is checked
+checkbox.addEventListener('change', () => {
+    console.log(returnedData)
+    if (checkbox.checked) {
+        degree = true
+        console.log(`Checkbox is ${degree}`);
+        getTop(returnedData[0],degree)
+        getBottom(returnedData,degree)
+
+    } else {
+        degree = false
+        console.log(`Checkbox is ${degree}`);
+        getTop(returnedData[0],degree)
+        getBottom(returnedData,degree)
+
+    }
+        
+})
 // Dynamically calculate visible items based on screen width
 function calculateVisibleCount() {
     const screenWidth = window.innerWidth;
