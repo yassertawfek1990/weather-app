@@ -30,7 +30,7 @@ form.addEventListener("keydown", async (event) => {
         console.log(returnedData[0]);
 
         // Pass the returned data to other functions
-        getTop(returnedData[0], degree);
+        getTop(returnedData[0]["hours"][new Date().getHours()], degree);
         getBottom(returnedData, degree);
        
     }
