@@ -30,7 +30,7 @@ form.addEventListener("keydown", async (event) => {
         console.log(returnedData[0]);
 
         // Pass the returned data to other functions
-        getTop(returnedData[0]["hours"][new Date().getHours()], degree);
+        getTop(returnedData[0], degree);
         getBottom(returnedData, degree);
        
     }
@@ -49,7 +49,7 @@ function getTop(obj,degree){
         div.setAttribute("class",`top${i}`)
         for (let x = 1;x <=2;x++){
             if(i == 1 && x==1){
-                let image = obj["icon"]
+                let image = obj["hours"][new Date().getHours()]["icon"]
                 document.querySelector("body").setAttribute("class",image)
                 let img = document.createElement('img');
                 img.setAttribute("src",`images/${image}.png`)
@@ -59,7 +59,7 @@ function getTop(obj,degree){
             }
             else if(i==2){
                 let h3 = document.createElement('h2');
-                h3.innerHTML = count==2?(degree?((obj[keys[count]]* 1.8) + 32).toFixed(1) :obj[keys[count]])+"&deg;":obj[keys[count]]
+                h3.innerHTML = count==2?(degree?((obj["hours"][new Date().getHours()][keys[count]]* 1.8) + 32).toFixed(1) :obj["hours"][new Date().getHours()][keys[count]])+"&deg;":obj["hours"][new Date().getHours()][keys[count]]
                 div.appendChild(h3);
                 count++
         
